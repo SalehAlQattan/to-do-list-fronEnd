@@ -24,6 +24,16 @@ class TodosStore {
       console.error(error);
     }
   };
+  // delete todo
+  deleteTodo = async (todoId) => {
+    try {
+      await axios.delete(`http://localhost:8000/todos/${todoId}`);
+      const filteredTodos = this.todos.filter((todo) => todo.id !== +todoId);
+      this.todos = filteredTodos;
+    } catch (error) {
+      console.error(error);
+    }
+  };
 }
 
 const todosStore = new TodosStore();
