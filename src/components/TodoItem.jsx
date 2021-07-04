@@ -1,6 +1,9 @@
 import todosStore from '../stores/todosStore';
 // hook
 import { useState } from 'react';
+// styled-components
+import DoneButton from './buttons/DoneButton';
+import DeleteButton from './buttons/DeleteButton';
 
 const TodoItem = ({ todo }) => {
   // done state
@@ -11,17 +14,18 @@ const TodoItem = ({ todo }) => {
   };
   // handle delete
   const handleDelete = () => {
-    console.log(todo.id);
     todosStore.deleteTodo(todo.id);
   };
 
   return (
     <div>
-      <h2 style={{ textDecoration: isDone ? 'line-through' : 'none' }}>
+      <h1 style={{ textDecoration: isDone ? 'line-through' : 'none' }}>
         {todo.name}
-      </h2>
-      <button onClick={handleClick}>{isDone ? 'Not Done' : 'Done'}</button>
-      <button onClick={handleDelete}>delete</button>
+      </h1>
+      <div style={{ width: '100%', display: 'flex', gap: '2rem' }}>
+        <DoneButton handleClick={handleClick} isDone={isDone} />
+        <DeleteButton handleDelete={handleDelete} />
+      </div>
     </div>
   );
 };

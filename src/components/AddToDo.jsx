@@ -1,9 +1,15 @@
+// mobx handle change without loading
 import { observer } from 'mobx-react';
+// importing the store
 import todosStore from '../stores/todosStore';
-
+// hook
 import { useState } from 'react';
+// components
+import AddButton from './buttons/AddButton';
+import AddInput from './AddInput';
 
 const AddToDo = () => {
+  // todo state
   const [todo, setTodo] = useState('');
   const handleChange = (event) => {
     setTodo({ ...todo, [event.target.name]: event.target.value });
@@ -14,17 +20,11 @@ const AddToDo = () => {
     event.target.reset();
   };
   return (
-    <div>
+    <div style={{ marginTop: '5rem' }}>
       <form onSubmit={handleSubmit}>
-        <label>Enter a Todo</label>
-        <input
-          placeholder="Add To Do..."
-          onChange={handleChange}
-          required
-          type="text"
-          name="name"
-        />
-        <button type="submit">Add</button>
+        <h1 style={{ display: 'inline' }}>Enter a Todo</h1>
+        <AddInput handleChange={handleChange} />
+        <AddButton />
       </form>
     </div>
   );
